@@ -46,8 +46,15 @@ public class ContaContabilController {
     }
 
     @GetMapping("/numero/{numero}")
-    public ResponseEntity<ContaContabil> findByNumero(@PathVariable("numero") String numero) {
-        return new ResponseEntity<>(contaContabilService.findByNumero(Long.valueOf(numero)), HttpStatus.OK);
+    public ResponseEntity<ContaContabil> findByNumero(@PathVariable("numero") Long numero) {
+
+        ContaContabil contaContabil = contaContabilService.findByNumero(numero);
+
+        if (contaContabil == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(contaContabil, HttpStatus.OK);
     }
 
     @PostMapping("/")
