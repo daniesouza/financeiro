@@ -33,7 +33,7 @@ mvn package spring-boot:run
 
 [Spring Boot](http://projects.spring.io/spring-boot/)
 
-[Spring Data Rest](http://projects.spring.io/spring-data-rest/)
+[Spring Data](http://projects.spring.io/spring-data/)
 
 [MongoDB](https://www.mongodb.com/)
 
