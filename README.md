@@ -8,10 +8,16 @@ mvn package spring-boot:run
 
 * [http://localhost:8080/financeiro/swagger-ui.html](http://localhost:8080/financeiro/swagger-ui.html)
 
+### Collection postman para teste
+
+* PROVA.postman_collection.json
+
+* Rodar com junit para testar alguns casos de teste de demonstracao
+
 
 ### Class Diagram
 
-<img src="class_diagram.png" alt="Financeiro Class Diagram" style="width: 1024px;" />
+* <img src="class_diagram.png" alt="Financeiro Class Diagram" style="width: 1024px;" />
 
 ### MongoDB Embebbed Config.
 * Database: test

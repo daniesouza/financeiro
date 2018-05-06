@@ -26,19 +26,18 @@ public class LancamentoContabilServiceTest {
 	
 	@Before
 	public void setUpMock() {
-		MockitoAnnotations.initMocks(LancamentoContabilServiceTest.class);
+		MockitoAnnotations.initMocks(this);
 	}
-	
-	@InjectMocks
-	private LancamentoContabilServiceImpl lancamentoContabilService;
-	
+
 	@Mock
-	private LancamentoContabilRepository lancamentoContabilRepository;
+    private LancamentoContabil lancamentoContabil;
+
+    @Mock
+	private LancamentoContabilServiceImpl lancamentoContabilService;
 	
 	@Test
 	public void lancamentoContabilServiceTest() {
-//		Mockito.when(lancamentoContabilRepository.findById(Mockito.anyString()).get()).thenReturn(new LancamentoContabil());
-//		assertNotNull(lancamentoContabilService.find(Mockito.anyString()));
+		Mockito.when(lancamentoContabilService.save(lancamentoContabil)).thenReturn(lancamentoContabil);
 	}
 
 }
