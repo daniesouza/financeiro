@@ -1,7 +1,6 @@
 # Prova lançamentos contabeis
 
 
-
 ### Para rodar!
 mvn package spring-boot:run
 
@@ -12,7 +11,7 @@ mvn package spring-boot:run
 
 ### Class Diagram
 
-<img src="class_diagram.png" alt="Store Class Diagram" style="width: 1024px;" />
+<img src="class_diagram.png" alt="Financeiro Class Diagram" style="width: 1024px;" />
 
 ### MongoDB Embebbed Config.
 * Database: test
