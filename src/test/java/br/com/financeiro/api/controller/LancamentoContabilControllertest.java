@@ -44,7 +44,6 @@ public class LancamentoContabilControllertest {
 	}
 
 	/**
-	 * Test ok sem cnpj.
 	 *
 	 * @throws Exception the exception
 	 */

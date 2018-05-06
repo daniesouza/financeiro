@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * Classe para tratamento de exceções customizadas.
+ * Class for handling custom exceptions.
  * 
  */
 @ControllerAdvice
@@ -25,8 +25,6 @@ public class CustomRestExceptionHandler {
     public final ResponseEntity<ValidationError> objetoObrigatorio(HttpMessageNotReadableException ex) {
 
         ValidationError exceptionResponse = new ValidationError("Invalid MessageBody", HttpStatus.BAD_REQUEST.name(),"MessageBody");
-
-
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
@@ -44,8 +42,12 @@ public class CustomRestExceptionHandler {
         return new ResponseEntity<>(validationErrors, HttpStatus.BAD_REQUEST);
     }
 
+
     @ExceptionHandler(ServiceValidationException.class)
     public ResponseEntity<ValidationErrors> excecoesNegocio(ServiceValidationException ex) {
+        /*
+            could return a HttpStatus.UNPROCESSABLE_ENTITY for business errors
+         */
         return new ResponseEntity<>(ex.getErrors(), HttpStatus.BAD_REQUEST);
     }
 

@@ -2,11 +2,16 @@ package br.com.financeiro.service.impl;
 
 import br.com.financeiro.dao.LancamentoContabilRepository;
 import br.com.financeiro.exception.handler.ServiceValidationException;
-import br.com.financeiro.model.LancamentoContabil;
 import br.com.financeiro.model.EstatisticaLancamentoContabil;
+import br.com.financeiro.model.LancamentoContabil;
+import br.com.financeiro.model.dto.LancamentoContabilDTO;
 import br.com.financeiro.service.LancamentoContabilService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
@@ -16,58 +21,105 @@ import java.util.UUID;
 @Service
 public class LancamentoContabilServiceImpl implements LancamentoContabilService {
 
+    /**
+     * Default Logger.
+     *
+     * @see LogManager
+     */
+    private static final Logger logger = LogManager.getLogger(LancamentoContabilServiceImpl.class);
+
     @Autowired
     private LancamentoContabilRepository lancamentoContabilRepository;
 
 
+    /**
+     * @param lancamentoContabil
+     * @return LancamentoContabil
+     * @see LancamentoContabil
+     */
     @Override
     public LancamentoContabil save(LancamentoContabil lancamentoContabil) {
 
         LancamentoContabil lanc = lancamentoContabilRepository.findByContaContabilAndData(lancamentoContabil.getContaContabil(),lancamentoContabil.getData());
 
         if(lanc != null){
-            throwAlreadyExistException();
+            ServiceValidationException sve = getAlreadyExistException();
+            throw sve;
         }
 
         lancamentoContabil.setId(UUID.randomUUID().toString());
 
-        return lancamentoContabilRepository.insert(lancamentoContabil);
+        /*
+         * if throw DuplicateKeyException that means a concurrency issue to be treated.
+         */
+        try{
+            return lancamentoContabilRepository.insert(lancamentoContabil);
+        }catch (DuplicateKeyException ex ){
+            logger.error(ex);
+            ServiceValidationException sve = getAlreadyExistException();
+            throw sve;
+        }
     }
 
+    /**
+     * @param lancamentoContabil
+     * @return LancamentoContabil
+     * @see LancamentoContabil
+     */
     @Override
     public LancamentoContabil update(LancamentoContabil lancamentoContabil) {
 
         LancamentoContabil lanc = lancamentoContabilRepository.findByContaContabilAndData(lancamentoContabil.getContaContabil(),lancamentoContabil.getData());
 
         if(lanc != null && !lanc.getId().equals(lancamentoContabil.getId())){
-            throwAlreadyExistException();
+            ServiceValidationException sve = getAlreadyExistException();
+            throw sve;
         }
 
         return lancamentoContabilRepository.save(lancamentoContabil);
     }
 
-    public ServiceValidationException throwAlreadyExistException(){
-        throw new ServiceValidationException("LançamentoContabil already existis with (contaContabil and data).",
+    private ServiceValidationException getAlreadyExistException(){
+        return new ServiceValidationException("LançamentoContabil already existis with (contaContabil and data).",
                 "lanc_exist",
                 "lancamentoContabil");
     }
 
+    /**
+     * @param id
+     * @return LancamentoContabil
+     * @see LancamentoContabil
+     */
     @Override
     public LancamentoContabil find(String id){
        Optional<LancamentoContabil> lancamentoContabilOpt = lancamentoContabilRepository.findById(id);
        return lancamentoContabilOpt.isPresent() ? lancamentoContabilOpt.get() : null;
     }
 
+    /**
+     * @return List<LancamentoContabil>
+     * @see LancamentoContabil
+     */
     @Override
     public List<LancamentoContabil> findAll() {
         return lancamentoContabilRepository.findAll();
     }
 
+    /**
+     * @param contaContabil
+     * @return List<LancamentoContabil>
+     * @see LancamentoContabil
+     */
     @Override
     public List<LancamentoContabil> findByContaContabil(Long contaContabil){
         return lancamentoContabilRepository.findByContaContabil(contaContabil);
     }
 
+    /**
+     * @param contaContabil
+     * @return EstatisticaLancamentoContabil
+     * @see EstatisticaLancamentoContabil
+     */
     @Override
     public EstatisticaLancamentoContabil findEstatisticasLancamentos(Long contaContabil){
 
@@ -98,6 +150,9 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
 
     }
 
+    /**
+     * @param id
+     */
     @Override
     public void deleteById(String id){
         lancamentoContabilRepository.deleteById(id);

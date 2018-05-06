@@ -5,6 +5,7 @@ import br.com.financeiro.dao.LancamentoContabilRepository;
 import br.com.financeiro.model.LancamentoContabil;
 import br.com.financeiro.service.LancamentoContabilService;
 import br.com.financeiro.service.impl.LancamentoContabilServiceImpl;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,25 +20,27 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringJUnit4ClassRunner.class )
 @SpringBootTest(classes = FinanceiroApplication.class)
 public class LancamentoContabilServiceTest {
-	
+
+
+	@Mock
+	private LancamentoContabilServiceImpl lancamentoContabilService;
+
 	@Before
 	public void setUpMock() {
 		MockitoAnnotations.initMocks(this);
+		Mockito.when(lancamentoContabilService.save(any(LancamentoContabil.class)))
+				.thenReturn(new LancamentoContabil(1234l,BigDecimal.TEN,new Date()));
 	}
 
-	@Mock
-    private LancamentoContabil lancamentoContabil;
 
-    @Mock
-	private LancamentoContabilServiceImpl lancamentoContabilService;
-	
 	@Test
 	public void lancamentoContabilServiceTest() {
-		Mockito.when(lancamentoContabilService.save(lancamentoContabil)).thenReturn(lancamentoContabil);
+		Assert.assertNotNull(lancamentoContabilService.save(new LancamentoContabil()));
 	}
 
 }

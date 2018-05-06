@@ -33,10 +33,6 @@ public class LancamentoContabilController {
 
 
     /**
-     * Metodo responsavel por receber POST
-     *  do objeto LancamentoContabilDTO.
-     *
-     *            - Objeto LancamentoContabilDTO.
      * @return List<LancamentoContabilDTO>.
      * @see LancamentoContabilDTO
      */
@@ -53,6 +49,11 @@ public class LancamentoContabilController {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
+    /**
+     * @param id
+     * @return List<LancamentoContabilDTO>.
+     * @see LancamentoContabilDTO
+     */
     @GetMapping("/{id}")
     public ResponseEntity<LancamentoContabilDTO> find(@PathVariable("id") String id) {
 
@@ -65,6 +66,11 @@ public class LancamentoContabilController {
         return new ResponseEntity<>(BeanMapper.getInstance().map(lancamentoContabil,LancamentoContabilDTO.class), HttpStatus.OK);
     }
 
+    /**
+     * @param contaContabil
+     * @return List<LancamentoContabilDTO>.
+     * @see LancamentoContabilDTO
+     */
     @GetMapping("/contaContabil/{contaContabil}")
     public ResponseEntity<List<LancamentoContabilDTO>> findByNumero(@PathVariable("contaContabil") Long contaContabil) {
 
@@ -82,6 +88,11 @@ public class LancamentoContabilController {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
+    /**
+     * @param lancamentoContabilDTO
+     * @return List<IdDTO>.
+     * @see IdDTO
+     */
     @PostMapping("/")
     public ResponseEntity<IdDTO> save(@RequestBody @Valid final LancamentoContabilDTO lancamentoContabilDTO) {
 
@@ -92,6 +103,11 @@ public class LancamentoContabilController {
         return new ResponseEntity<>(new IdDTO(lancamentoContabil.getId()), HttpStatus.CREATED);
     }
 
+    /**
+     * @param lancamentoContabilDTO
+     * @return List<IdDTO>.
+     * @see IdDTO
+     */
     @PutMapping("/{id}")
     public ResponseEntity<IdDTO> update(@PathVariable("id") String id, @RequestBody @Valid final LancamentoContabilDTO lancamentoContabilDTO) {
 
@@ -110,6 +126,11 @@ public class LancamentoContabilController {
         return new ResponseEntity<>(new IdDTO(lancamentoContabil.getId()), HttpStatus.OK);
     }
 
+    /**
+     * @param id
+     * @return List<MessageDTO>.
+     * @see MessageDTO
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageDTO> delete(@PathVariable("id") String id) {
         logger.info("Deleting Lançamento with ID = " + id + "...");
@@ -125,6 +146,11 @@ public class LancamentoContabilController {
     }
 
 
+    /**
+     * @param contaContabil
+     * @return List<EstatisticaLancamentoContabil>.
+     * @see EstatisticaLancamentoContabil
+     */
     @GetMapping("/_stats/")
     public ResponseEntity<EstatisticaLancamentoContabil> find(@RequestParam(value = "contaContabil", required = false) Long contaContabil) {
         EstatisticaLancamentoContabil estatistica = lancamentoContabilService.findEstatisticasLancamentos(contaContabil);

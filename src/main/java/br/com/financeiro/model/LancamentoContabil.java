@@ -19,6 +19,7 @@ public class LancamentoContabil implements Serializable {
 
     @Id
     private String id;
+
     private Long contaContabil;
     private BigDecimal valor;
     private Date data;
