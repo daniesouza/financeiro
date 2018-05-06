@@ -1,29 +1,45 @@
-# README #
+# Prova lançamentos contabeis
 
-This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Para rodar!
+mvn package spring-boot:run
 
-### How do I get set up? ###
+### Documentação endpoints
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* [http://localhost:8080/financeiro/swagger-ui.html](http://localhost:8080/financeiro/swagger-ui.html)
 
-### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+### Class Diagram
 
-### Who do I talk to? ###
+<img src="class_diagram.png" alt="Store Class Diagram" style="width: 1024px;" />
 
-* Repo owner or admin
-* Other community or team contact
+### MongoDB Embebbed Config.
+* Database: test
+* Collections: lancamentos-contabeis
+* url: localhost
+* port: 12345
+
+
+
+### Ferramentas utilizadas
+
+[Swagger](https://swagger.io)
+
+[Spring Boot](http://projects.spring.io/spring-boot/)
+
+[Spring Data Rest](http://projects.spring.io/spring-data-rest/)
+
+[MongoDB](https://www.mongodb.com/)
+
+[embedmongo-spring](https://github.com/jirutka/embedmongo-spring)
+
+[de.flapdoodle.embed.mongo](https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo)
+
+[Dozer mapping](http://dozer.sourceforge.net)
+
+[Mockito](http://site.mockito.org)
+
+
+	
+

@@ -1,12 +1,12 @@
 package br.com.financeiro.service.impl;
 
 import br.com.financeiro.dao.LancamentoContabilRepository;
+import br.com.financeiro.exception.handler.ServiceValidationException;
 import br.com.financeiro.model.LancamentoContabil;
 import br.com.financeiro.model.EstatisticaLancamentoContabil;
 import br.com.financeiro.service.LancamentoContabilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
@@ -22,15 +22,35 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
 
     @Override
     public LancamentoContabil save(LancamentoContabil lancamentoContabil) {
+
+        LancamentoContabil lanc = lancamentoContabilRepository.findByContaContabilAndData(lancamentoContabil.getContaContabil(),lancamentoContabil.getData());
+
+        if(lanc != null){
+            throwAlreadyExistException();
+        }
+
         lancamentoContabil.setId(UUID.randomUUID().toString());
+
         return lancamentoContabilRepository.insert(lancamentoContabil);
     }
 
     @Override
     public LancamentoContabil update(LancamentoContabil lancamentoContabil) {
+
+        LancamentoContabil lanc = lancamentoContabilRepository.findByContaContabilAndData(lancamentoContabil.getContaContabil(),lancamentoContabil.getData());
+
+        if(lanc != null && !lanc.getId().equals(lancamentoContabil.getId())){
+            throwAlreadyExistException();
+        }
+
         return lancamentoContabilRepository.save(lancamentoContabil);
     }
 
+    public ServiceValidationException throwAlreadyExistException(){
+        throw new ServiceValidationException("LançamentoContabil already existis with (contaContabil and data).",
+                "lanc_exist",
+                "lancamentoContabil");
+    }
 
     @Override
     public LancamentoContabil find(String id){
@@ -60,7 +80,7 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
         }
 
         if(lancamentos == null || lancamentos.isEmpty()){
-            throw new RuntimeException("Lançamentos vazios");
+            return new EstatisticaLancamentoContabil(BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO);
         }
 
         lancamentos.stream().mapToDouble(value -> value.getValor().doubleValue()).sum();

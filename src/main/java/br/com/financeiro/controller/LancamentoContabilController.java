@@ -75,6 +75,10 @@ public class LancamentoContabilController {
                     dtos.add(BeanMapper.getInstance().map(cc,LancamentoContabilDTO.class));
                 });
 
+        if(dtos.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
@@ -94,14 +98,14 @@ public class LancamentoContabilController {
         logger.info("Updating "+lancamentoContabilDTO.toString());
 
         LancamentoContabil lancamentoContabil = lancamentoContabilService.find(id);
+
         if (lancamentoContabil == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        lancamentoContabil.setContaContabil(lancamentoContabilDTO.getContaContabil());
-        lancamentoContabil.setData(lancamentoContabilDTO.getData());
-        lancamentoContabil.setValor(lancamentoContabilDTO.getValor());
 
-        lancamentoContabilService.update(lancamentoContabil);
+        lancamentoContabilDTO.setId(lancamentoContabil.getId());
+
+        lancamentoContabilService.update(BeanMapper.getInstance().map(lancamentoContabilDTO,LancamentoContabil.class));
 
         return new ResponseEntity<>(new IdDTO(lancamentoContabil.getId()), HttpStatus.OK);
     }
@@ -109,6 +113,13 @@ public class LancamentoContabilController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageDTO> delete(@PathVariable("id") String id) {
         logger.info("Deleting Lançamento with ID = " + id + "...");
+
+        LancamentoContabil lancamentoContabil = lancamentoContabilService.find(id);
+
+        if (lancamentoContabil == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         lancamentoContabilService.deleteById(id);
         return new ResponseEntity<>(new MessageDTO("Lancamento has been deleted!"), HttpStatus.OK);
     }
