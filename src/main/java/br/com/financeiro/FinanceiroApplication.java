@@ -1,6 +1,6 @@
 package br.com.financeiro;
 
-import br.com.financeiro.dao.ContaContabilRepository;
+import br.com.financeiro.dao.LancamentoContabilRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class FinanceiroApplication {
 
 	@Resource
-	private ContaContabilRepository repository;
+	private LancamentoContabilRepository repository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FinanceiroApplication.class, args);
