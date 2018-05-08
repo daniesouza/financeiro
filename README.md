@@ -1,4 +1,4 @@
-# lançamentos contabeis test
+# Lançamentos contabeis
 
 
 ### To run!
@@ -27,7 +27,7 @@ mvn package spring-boot:run
 
 
 
-### Tools used
+### Used tools
 
 [Swagger](https://swagger.io)
 
