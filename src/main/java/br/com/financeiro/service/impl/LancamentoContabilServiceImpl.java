@@ -33,6 +33,9 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
 
 
     /**
+     *
+     * Could have used a synchronized method but i preferred to let database handle concurrency
+     *
      * @param lancamentoContabil
      * @return LancamentoContabil
      * @see LancamentoContabil
@@ -62,6 +65,9 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
     }
 
     /**
+     *
+     *  Could have used a synchronized method but i preferred to let database handle concurrency
+     *
      * @param lancamentoContabil
      * @return LancamentoContabil
      * @see LancamentoContabil
@@ -76,7 +82,16 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
             throw sve;
         }
 
-        return lancamentoContabilRepository.save(lancamentoContabil);
+        /*
+         * if throw DuplicateKeyException that means a concurrency issue to be treated.
+         */
+        try{
+            return lancamentoContabilRepository.save(lancamentoContabil);
+        }catch (DuplicateKeyException ex ){
+            logger.error(ex);
+            ServiceValidationException sve = getAlreadyExistException();
+            throw sve;
+        }
     }
 
     private ServiceValidationException getAlreadyExistException(){

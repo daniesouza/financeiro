@@ -1,14 +1,14 @@
-# Prova lançamentos contabeis
+# lançamentos contabeis test
 
 
-### Para rodar!
+### To run!
 mvn package spring-boot:run
 
-### Documentação endpoints
+### Endpoints documentation
 
 * [http://localhost:8080/financeiro/swagger-ui.html](http://localhost:8080/financeiro/swagger-ui.html)
 
-### Collection postman para teste
+### Collection postman for test
 
 * PROVA.postman_collection.json
 
@@ -27,7 +27,7 @@ mvn package spring-boot:run
 
 
 
-### Ferramentas utilizadas
+### Tools used
 
 [Swagger](https://swagger.io)
 
