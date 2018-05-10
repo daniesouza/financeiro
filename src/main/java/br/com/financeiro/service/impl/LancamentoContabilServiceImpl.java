@@ -95,7 +95,7 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
     }
 
     private ServiceValidationException getAlreadyExistException(){
-        return new ServiceValidationException("LanÃ§amentoContabil already existis with (contaContabil and data).",
+        return new ServiceValidationException("LançamentoContabil already existis with (contaContabil and data).",
                 "lanc_exist",
                 "lancamentoContabil");
     }
@@ -150,7 +150,6 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
             return new EstatisticaLancamentoContabil(BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO);
         }
 
-        lancamentos.stream().mapToDouble(value -> value.getValor().doubleValue()).sum();
 
         BigDecimal soma = lancamentos.stream()
                 .map(LancamentoContabil::getValor)
