@@ -1,4 +1,4 @@
-# Lancamentos contabeis - Simple springboot + mongoDB application
+# Lancamentos contabeis - Simple Springboot + mongoDB application
 
 
 ### To run
@@ -45,3 +45,4 @@ mvn package spring-boot:run
 
 [Junit](https://junit.org)
 
+[Maven](https://maven.apache.org)
