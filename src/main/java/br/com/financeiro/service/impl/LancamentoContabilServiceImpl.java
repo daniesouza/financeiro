@@ -4,7 +4,6 @@ import br.com.financeiro.dao.LancamentoContabilRepository;
 import br.com.financeiro.exception.handler.ServiceValidationException;
 import br.com.financeiro.model.EstatisticaLancamentoContabil;
 import br.com.financeiro.model.LancamentoContabil;
-import br.com.financeiro.model.dto.LancamentoContabilDTO;
 import br.com.financeiro.service.LancamentoContabilService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -95,7 +94,7 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
     }
 
     private ServiceValidationException getAlreadyExistException(){
-        return new ServiceValidationException("LançamentoContabil already existis with (contaContabil and data).",
+        return new ServiceValidationException("LanÃ§amentoContabil already existis with (contaContabil and data).",
                 "lanc_exist",
                 "lancamentoContabil");
     }
