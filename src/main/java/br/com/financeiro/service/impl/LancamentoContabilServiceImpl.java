@@ -150,7 +150,6 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
             return new EstatisticaLancamentoContabil(BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO,BigDecimal.ZERO);
         }
 
-        lancamentos.stream().mapToDouble(value -> value.getValor().doubleValue()).sum();
 
         BigDecimal soma = lancamentos.stream()
                 .map(LancamentoContabil::getValor)

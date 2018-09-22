@@ -1,4 +1,4 @@
-# Lancamentos contabeis
+# Lancamentos contabeis - Simple springboot + mongoDB application
 
 
 ### To run!
@@ -8,16 +8,14 @@ mvn package spring-boot:run
 
 * [http://localhost:8080/financeiro/swagger-ui.html](http://localhost:8080/financeiro/swagger-ui.html)
 
-### Collection postman for test
+### Tests
 
-* PROVA.postman_collection.json
-
-* Rodar com junit para testar alguns casos de teste de demonstracao
+* Run with junit to test some demo testcases.
 
 
 ### Class Diagram
 
-* <img src="class_diagram.png" alt="Financeiro Class Diagram" style="width: 1024px;" />
+![Classes](docs/diagramas/class_diagram.png)
 
 ### MongoDB Embebbed Config.
 * Database: test
