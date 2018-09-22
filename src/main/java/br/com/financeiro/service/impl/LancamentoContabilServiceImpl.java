@@ -95,7 +95,7 @@ public class LancamentoContabilServiceImpl implements LancamentoContabilService 
     }
 
     private ServiceValidationException getAlreadyExistException(){
-        return new ServiceValidationException("LanÃ§amentoContabil already existis with (contaContabil and data).",
+        return new ServiceValidationException("LançamentoContabil already existis with (contaContabil and data).",
                 "lanc_exist",
                 "lancamentoContabil");
     }
